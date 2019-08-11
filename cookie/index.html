@@ -1,19 +1,17 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-
 <head>
 <script>
-var myCookies = {}
-
+var myCookies = {};
 function saveCookies()
 {
-  myCookies["_user"] = document.getElementById("user").value;
-  myCookies["_uage"] = document.getElementById("age").value;
-  //Start reusable Code
-  document.cookie = "";
-  var expiresAttrib = new Date(Date.now()+60*1000).toString();
-  var cookieString = "";
-  for (var key in myCookies)
+	myCookies["_user"] = document.getElementById("user").value;
+	myCookies["_uage"] = document.getElementById("age").value.toString();
+	//Start Reuseable Section
+	document.cookie = "";
+	var expiresAttrib = new Date(Date.now()+60*1000).toString();
+	var cookieString = "";
+	for (var key in myCookies)
 	{
 		cookieString = key+"="+myCookies[key]+";"+expiresAttrib+";";
 		document.cookie = cookieString;
@@ -21,7 +19,6 @@ function saveCookies()
 	//End Reuseable Section
 	document.getElementById("out").innerHTML = document.cookie;
 }
-
 function loadCookies()
 {
 	//Start Reuseable Section
@@ -36,18 +33,14 @@ function loadCookies()
 	document.getElementById("user").value = myCookies["_user"];
 	document.getElementById("age").value = myCookies["_uage"];
 }
-
 </script>
 </head>
-
 <body>
-<h1>Hello Cookie</h1>
-<p>I'm hosted with GitHub Pages.</p>
-User: <input type="text" id="user">
-Age: <input type="text" id="age">
-<button onclick="updatelist()">Save Cookies<button>
-<button onclick="updatelist()">Load Cookies<button>
+
+<input type="text" id="user">
+<input type="text" id="age">
+<button onclick="saveCookies()">Save To Cookies</button>
+<button onclick="loadCookies()">Load From Cookies</button>
 <p id="out"></p>
 </body>
-
 </html>
