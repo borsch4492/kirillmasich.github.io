@@ -1,5 +1,29 @@
-PImage imgSwamp, imgGrass, imgRiver, imgRoad, imgLoot, imgCar, imgPlayer1, imgPlayer2, imgPlayer3, imgPlayer4, imgEnemy1, imgEnemy2, imgEnemy3, imgEnemy4, imgGranade; //<>// //<>//
-String[] map; //<Don`t forget what we have debug ;)>//
+
+/* @pjs preload="./assets/mapTextures/swamp_2.jpg","./assets/mapTextures/grass_2.jpg","./assets/mapTextures/river_2.jpg","./assets/mapTextures/road_2.jpg","./assets/otherTextures/loot.png","./assets/otherTextures/car.png","./assets/playerTextures/player1.png","./assets/playerTextures/player2.png","./assets/playerTextures/player3.png","./assets/playerTextures/player4.png","./assets/monsterTextures/monster1.png","./assets/monsterTextures/monster2.png","./assets/monsterTextures/monster3.png","./assets/monsterTextures/monster4.png","./assets/otherTextures/granade.png"; */
+
+PImage imgSwamp, imgGrass, imgRiver, imgRoad, imgLoot, imgCar, imgPlayer1, imgPlayer2, imgPlayer3, imgPlayer4, imgEnemy1, imgEnemy2, imgEnemy3, imgEnemy4, imgGranade; //<>//
+String[] map = {
+"..........~.........",
+".......%%.~.........",
+".......%%.~.........",
+"@.....@.@.~...@.....",
+"...@......~.........",
+"..........~.........",
+"..........~....%%...",
+"..........~....%%...",
+"..........~.........",
+"........%%~..@......",
+".....@..%%~...%%....",
+"..........~...%%....",
+"====================",
+"..........~.........",
+"..........~.....%%..",
+"..........~.....%%..",
+"..........~.........",
+"..........~.........",
+"..........~.........",
+"..........~........."
+}; //<Don`t forget what we have debug ;)>//
 boolean gameWin = false;
 boolean gameOver = false;
 boolean debugMode = true;
@@ -43,12 +67,6 @@ int Gx;
 int Gy;
 int cooldown;
 int lastKeyCode;
-boolean wPressed = false;
-boolean aPressed = false;
-boolean sPressed = false;
-boolean dPressed = false;
-
-
 button buttonStart;
 button buttonRusume;
 button buttonRestart;
@@ -58,9 +76,23 @@ void setup()
 {
   size(600, 625);
   frameRate(25);
+
+  try
+  {
+    font = loadFont("tahoma.ttf");
+    textFont(font);
+  }
+  catch (Exception e)
+  {
+    //println(e);
+  }
+  textSize(12);
+
   background(255);
   noStroke();
   mapGenerator();
+
+
 
   imgSwamp = loadImage("assets/mapTextures/swamp_2.jpg");
   imgGrass = loadImage("assets/mapTextures/grass_2.jpg");
@@ -77,17 +109,18 @@ void setup()
   imgEnemy3 = loadImage("assets/monsterTextures/monster3.png");
   imgEnemy4 = loadImage("assets/monsterTextures/monster4.png");
   imgGranade = loadImage("assets/otherTextures/granade.png");
-  saveStrings("map.txt", map);
+  //saveStrings("map.txt", map);
 
   buttonStart = new button(120, 140, 200, 100, "START");
   buttonRestart = new button(120, 140, 200, 100, "RESTART");
-  buttonRusume = new button(300, 340, 200, 100, "RESUME");
+  buttonRusume = new button(300, 340, 200, 100, "RUSUME");
 }
 
 
 void draw()
 {
   background(255);
+//return;
   noStroke();
   gameLogic();
   drawMap();
@@ -116,13 +149,12 @@ void draw()
     }
     if (gameStart == true)
     {
-      buttonRestart.draw();
+      if (gameStart == true || gameOver == true)
+      {
+        buttonRestart.draw();
+      }
       buttonRusume.draw();
     }
-  }
-  if (gameOver == true)
-  {
-    buttonRestart.draw();
   }
 }
 
@@ -170,11 +202,11 @@ void drawgameWinCar()
 
 
 //void drawStartCar()
-{
-  sx = cx;
-  sy = cy;
+//{
+  //sx = cx;
+  //sy = cy;
   //image(imgCar, sx*CS, sy*CS, CS, CS);
-}
+//}
 
 
 void drawMap()
@@ -183,23 +215,23 @@ void drawMap()
   {
     for (x = 0; x < map[y].length(); x++)
     {
-      if (map[y].charAt(x) == '%')
+      if (map[y].charAt(x) == str('%'))
       {
         swamp(x, y);
       }
-      if (map[y].charAt(x) == '.')
+      if (map[y].charAt(x) == str('.'))
       {
         grass(x, y);
       }
-      if (map[y].charAt(x) == '~')
+      if (map[y].charAt(x) == str('~'))
       {
         river(x, y);
       }
-      if (map[y].charAt(x) == '=')
+      if (map[y].charAt(x) == str('='))
       {
         road(x, y);
       }
-      if (map[y].charAt(x) == '@')
+      if (map[y].charAt(x) == str('@'))
       {
         grass(x, y);
         loot(x, y);
@@ -283,11 +315,6 @@ void drawMonster()
 
 void gameLogic()
 {
-  //if ()
-  {
-
-  }
-
   if (!gameStopped)
   {
     monsterCooldown--;
@@ -322,9 +349,10 @@ void gameLogic()
   if (px == mx && py == my && scoreLoot >= 1 && GoD == false)
   {
     gameOver = true;
-    println("game over");
+    //println("game over");
+	gameStopped = true;
   }
-  if (map[py].charAt(px) == '@')
+  if (map[py].charAt(px) == str('@'))
   {
     map[py] = replace(map[py], px, '.');
     scoreLoot++;
@@ -333,7 +361,7 @@ void gameLogic()
   if (px == cx && py == cy && gameWin != true && scoreLoot >= 5)
   {
     //gameWin = true;
-    println("gameWin");
+    //println("gameWin");
     mapGenerator();
     scoreLoot = 0;
     level++;
@@ -356,15 +384,15 @@ void keyPressed()
   {
     return;
   }
-  //println("keyCode = ", keyCode);
+  //print("keyCode = ");
+  //println(keyCode);
   if (gameWin != true && gameOver != true)
   {
     if (keyCode == 87 && py != 0 && gameStopped == false) // w = 87
     {
-      wPressed = true;
       copyPlayerCoords();
       py -= 1;
-      if (map[py].charAt(px) != '.' && map[py].charAt(px) != '=' && map[py].charAt(px) != '@')
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
       {
         py += 1;
       }
@@ -372,10 +400,9 @@ void keyPressed()
     }
     if (keyCode == 65 && px != 0 && gameStopped == false) // a = 65
     {
-      aPressed = true;
       copyPlayerCoords();
       px -= 1;
-      if (map[py].charAt(px) != '.' && map[py].charAt(px) != '=' && map[py].charAt(px) != '@')
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
       {
         px +=1;
       }
@@ -383,10 +410,9 @@ void keyPressed()
     }
     if (keyCode == 83 && py != DIM - 1 && gameStopped == false) // s = 83
     {
-      sPressed = true;
       copyPlayerCoords();
       py += 1;
-      if (map[py].charAt(px) != '.' && map[py].charAt(px) != '=' && map[py].charAt(px) != '@')
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
       {
         py -= 1;
       }
@@ -394,10 +420,9 @@ void keyPressed()
     }
     if (keyCode == 68 && px != DIM - 1 && gameStopped == false) // d = 68
     {
-      dPressed = true;
       copyPlayerCoords();
       px += 1;
-      if (map[py].charAt(px) != '.' && map[py].charAt(px) != '=' && map[py].charAt(px) != '@')
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
       {
         px -= 1;
       }
@@ -418,7 +443,7 @@ void keyPressed()
     GoD = true;
   }
 
-  if (key == ESC)
+  if (key == ESC || keyCode == 80) // p = 80
   {
     if (gameStopped == false)
     {
@@ -435,9 +460,10 @@ void drawGranade()
 {
   image(imgGranade, Gx*CS, Gy*CS, CS, CS);
 }
+
 String replace(String s, int p, char ch)
 {
-  String newS = s.substring(0, p) + ch + s.substring(p+1);
+  String newS = s.substring(0, p) + str(ch) + s.substring(p+1);
   return newS;
 }
 
@@ -458,19 +484,6 @@ int monsterStep()
   int n4 = 1000; // up
 
   int VERY_MUCH = 1000;
-
-
-  //map = loadStrings("map.txt");
-  /*
-  px = 10 + int(random(-5, 5));
-   py = 10 + int(random(-5, 5));
-   println("player", px, py);
-
-
-   mx = int(random(DIM));
-   my = int(random(DIM));
-   println("monster", mx, my);
-   */
 
 
   int a = min( min(n1, n2), min(n3, n4));
@@ -504,7 +517,7 @@ int monsterStep()
   if (mx+1 < DIM)
   {
     ch = map[my].charAt(mx+1);
-    if (ch == '~' || ch == '%')
+    if (ch == str('~') || ch == str('%'))
     {
       dr = VERY_MUCH;
     }
@@ -513,7 +526,7 @@ int monsterStep()
   if (my+1 < DIM)
   {
     ch = map[my+1].charAt(mx);
-    if (ch == '~' || ch == '%')
+    if (ch == str('~') || ch == str('%'))
     {
       dd = VERY_MUCH;
     }
@@ -522,7 +535,7 @@ int monsterStep()
   if (mx-1 >= 0)
   {
     ch = map[my].charAt(mx-1);
-    if (ch == '~' || ch == '%')
+    if (ch == str('~') || ch == str('%'))
     {
       dl = VERY_MUCH;
     }
@@ -531,7 +544,7 @@ int monsterStep()
   if (my-1 >= 0)
   {
     ch = map[my-1].charAt(mx);
-    if (ch == '~' || ch == '%')
+    if (ch == str('~') || ch == str('%'))
     {
       du = VERY_MUCH;
     }
@@ -669,18 +682,13 @@ void addRandomLoot()
   int coLoot = 7;
   for (int f = 0; f<coLoot; f++)
   {
-    while (map[sy].charAt(sx) != '.')
+    while (map[sy].charAt(sx) != str('.'))
     {
       sx = int(random(DIM-1));
       sy = int(random(DIM-1));
     }
     map[sy] = replace(map[sy], sx, '@');
   }
-
-
-  //map[sy] = replace(map[sy], sx+1, '%');
-  //map[sy+1] = replace(map[sy+1], sx, '%');
-  //map[sy+1] = replace(map[sy+1], sx+1, '%');
 }
 
 
@@ -697,14 +705,8 @@ void make(int h, char symbvol)
 
 void mapGenerator()
 {
-  map = loadStrings("map.txt");
-  /*
-  while (map[py].charAt(px) != '=')
-   {
-   px = int(random(20-1));
-   py = int(random(20-1));
-   }
-   */
+  //map = loadStrings("map.txt");
+
 
   //println(mx, my, px, py);
   lenY = DIM; //map.length;
@@ -719,30 +721,37 @@ void mapGenerator()
       map[h] = map[h] + ".";
     }
   }
-  //reset = eskize;
-  //eskize = map;
+
+
   int coSwamp = 5;
-  for (int d = 0; d<coSwamp; d++) addRandomSwamp();
+  for (int d = 0; d<coSwamp; d++)
+  {
+    addRandomSwamp();
+  }
+
 
   addRandomRiver();
 
+
   addRandomWay();
+
 
   addRandomLoot();
 
-  while (map[cy].charAt(cx) != '=')
+
+  while (map[cy].charAt(cx) != str('='))
   {
     cx = int(random(20-1));
     cy = int(random(20-1));
   }
 
-  while (map[py].charAt(px) != '=' && map[cy].charAt(cx) != map[py].charAt(px))
+  while (map[py].charAt(px) != str('=') && map[cy].charAt(cx) != map[py].charAt(px))
   {
     px = int(random(20-1));
     py = int(random(20-1));
   }
 
-  while (map[my].charAt(mx) != '=' && map[my].charAt(mx) != map[py].charAt(px) && map[my].charAt(mx) != map[cy].charAt(cx))
+  while (map[my].charAt(mx) != str('=') && map[my].charAt(mx) != map[py].charAt(px) && map[my].charAt(mx) != map[cy].charAt(cx))
   {
     if (di == 1)
     {
@@ -789,13 +798,78 @@ void mousePressed()
       gameOver = false;
     }
   }
-  if (buttonRestart.mousePressed(mouseX, mouseY) == true)
+}
+
+
+class button
+{
+  int _bx;
+  int _by;
+  int _bw;
+  int _bh;
+  boolean _bo = false;
+  String _bString = "LAL";
+
+  PGraphics _bg;
+
+  button(int bx, int by, int bw, int bh, String bString)
   {
-    gameStopped = false;
-    scoreLoot = 0;
-    score = 0;
-    level = 1;
-    gameOver = false;
-    mapGenerator();
+    _bx = bx;
+    _by = by;
+    _bw = bw;
+    _bh = bh;
+    _bString = bString;
+
+    _bg = createGraphics(_bw, _bh);
+    drawPrepare();
+  }
+
+  void draw()
+  {
+    _bg.beginDraw();
+    if (_bo == true)
+    {
+      _bg.fill(255, 150, 150);
+    } else
+    {
+      _bg.fill(255);
+    }
+    _bg.rect(0, 0, _bw, _bh);
+    _bg.fill(0, 255, 0);
+    _bg.text(_bString, _bw/2, _bh/2);
+    _bg.endDraw();
+
+    image(_bg, _bx, _by);
+  }
+
+  void drawPrepare()
+  {
+    _bg.beginDraw();
+    _bg.background(0);
+
+    //PFont pf = createFont("sans.ttf", 72);
+    //_bg.textFont(pf);
+    _bg.textAlign(CENTER, CENTER);
+    _bg.textSize(40);
+
+    _bg.endDraw();
+  }
+
+  void mouseMoved(int mx, int my)
+  {
+    if (mx >= _bx && mx <= _bx + _bw && my >= _by && my <= _by + _bh)
+    {
+      _bo = true;
+    } else
+    {
+      _bo = false;
+    }
+  }
+
+  boolean mousePressed(int mx, int my)
+  {
+    boolean bp = (mx >= _bx && mx <= _bx + _bw && my >= _by && my <= _by + _bh);
+    //println(bp);
+    return bp;
   }
 }
