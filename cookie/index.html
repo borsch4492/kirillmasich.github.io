@@ -1,47 +1,26 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Cookies</title>
+<title>Local Storage</title>
 <script>
-var myCookies = {};
-function saveCookies()
+function saveValues()
 {
-	myCookies["_user"] = document.getElementById("user").value;
-	myCookies["_uage"] = document.getElementById("age").value.toString();
-	//Start Reuseable Section
-	document.cookie = "";
-	var expiresAttrib = new Date(Date.now()+60*1000).toString();
-	var cookieString = "";
-	for (var key in myCookies)
-	{
-		cookieString = key+"="+myCookies[key]+";"+expiresAttrib+";";
-		document.cookie = cookieString;
-	}
-	//End Reuseable Section
-	document.getElementById("out").innerHTML = document.cookie;
+	localStorage._user = document.getElementById("user").value;
+	localStorage._uage = document.getElementById("age").value.toString();
 }
-function loadCookies()
+function loadValues()
 {
-	//Start Reuseable Section
-	myCookies = {};
-	var kv = document.cookie.split(";");
-	for (var id in kv)
-	{
-		var cookie = kv[id].split("=");
-		myCookies[cookie[0].trim()] = cookie[1];
-	}
-	//End Reuseable Section
-	document.getElementById("user").value = myCookies["_user"];
-	document.getElementById("age").value = myCookies["_uage"];
+	document.getElementById("user").value = localStorage._user;
+	document.getElementById("age").value = localStorage._uage;
 }
 </script>
 </head>
 <body>
 
-User: <input type="text" id="user">
+Name: <input type="text" id="user">
 Age: <input type="text" id="age">
-<button onclick="saveCookies()">Save To Cookies</button>
-<button onclick="loadCookies()">Load From Cookies</button>
+<button onclick="saveValues()">Save</button>
+<button onclick="loadValues()">Load</button>
 <p id="out"></p>
 </body>
 </html>
