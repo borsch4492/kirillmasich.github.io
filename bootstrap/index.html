@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0">
+ <title>Clock Widget Bootstrap | BootstrapTema</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://bootstraptema.ru/plugins/2017/thooclock/jquery.thooClock.js"></script>
+ <style>
+ .clock-grids {
+ background: #FFFFFF;
+ border-radius: 5px;
+ -webkit-border-radius: 5px;
+ -ms-border-radius: 5px;
+ -o-border-radius: 5px;
+ -moz-border-radius: 5px;
+ border-top: solid 5px #399348;
+ box-shadow: 0 0px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+ }
+
+ .clock-heading h3 {
+ margin: 1em 0;
+ text-align: center;
+ font-size: 1.5em;
+ color: #EE732F;
+ font-weight: 600;
+ text-transform: uppercase;
+ }
+
+ .clock-left {
+ padding: 0 1em;
+ }
+
+ .clock {
+ display: inline;
+ }
+
+ div#myclock {
+ text-align: center;
+ }
+
+ div#myclock canvas {
+ width: 300px !important;
+ height: 300px !important;
+ }
+
+ #set {
+ text-decoration: none;
+ padding: 5px 10px 5px 10px;
+ color: #FFF;
+ background-color: #F3A829;
+ border-radius: 5px;
+ }
+
+ #set:hover {
+ text-decoration: none;
+ padding: 4px 9px 4px 9px;
+ color: #fefefe;
+ background-color: #F3A829;
+ border-radius: 5px;
+ }
+
+ #Date {
+ font-size: 1em;
+ text-align: center;
+ color: #FFFFFF;
+ }
+
+ .clock ul {
+ padding: 0;
+ margin: 1em 0 0 0;
+ text-align: center;
+ }
+
+ .clock ul li {
+ display: inline;
+ font-size: 2em;
+ text-align: center;
+ color: #FFF;
+ }
+
+ .clock-bottom {
+ margin: 1em 0 0 0;
+ padding: 1em;
+ background: #22aaa1;
+ background: -moz-linear-gradient(left, #22aaa1 0%, #399348 100%);
+ background: -webkit-linear-gradient(left, #22aaa1 0%, #399348 100%);
+ background: linear-gradient(to right, #22aaa1 0%, #399348 100%);
+ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#22aaa1', endColorstr='#399348', GradientType=1);
+ border-bottom-left-radius: 5px;
+ -webkit-border-bottom-left-radius: 5px;
+ -moz-border-bottom-left-radius: 5px;
+ -ms-border-bottom-left-radius: 5px;
+ -o-border-bottom-left-radius: 5px;
+ border-bottom-right-radius: 5px;
+ -webkit-border-bottom-right-radius: 5px;
+ -ms-border-bottom-right-radius: 5px;
+ -moz-border-bottom-right-radius: 5px;
+ -o-border-bottom-right-radius: 5px;
+ }
+
+ @media (max-width:1080px) {
+ div#myclock canvas {
+ width: 250px !important;
+ height: 250px !important;
+ }
+ }
+
+ @media (max-width:320px) {
+ div#myclock canvas {
+ width: 200px !important;
+ height: 200px !important;
+ }
+ }
+ </style>
+ <script>
+ $(document).ready(function() {
+ var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+ var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+ var newDate = new Date();
+ newDate.setDate(newDate.getDate());
+ $('#Date').html(dayNames[newDate.getDay()] + " " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
+ setInterval(function() {
+ var seconds = new Date().getSeconds();
+ $("#sec").html((seconds < 10 ? "0" : "") + seconds);
+ }, 1000);
+ setInterval(function() {
+ var minutes = new Date().getMinutes();
+ $("#min").html((minutes < 10 ? "0" : "") + minutes);
+ }, 1000);
+ setInterval(function() {
+ var hours = new Date().getHours();
+ $("#hours").html((hours < 10 ? "0" : "") + hours);
+ }, 1000);
+
+ $('#myclock').thooClock({
+ dialColor:'#222',
+ secondHandColor:'#C00',
+ size:300,
+ showNumerals:false,
+ brandText:'BootstrapTema',
+ brandText2:'Plugin for website'
+ });
+
+ });
+ </script>
+</head>
+
+<body>
+ <div class="col-md-4 col-md-offset-4">
+ <div class="clock-grids">
+ <div class="clock-heading">
+ <h3>Clock Widget</h3>
+ </div>
+ <div class="clock-left">
+ <div id="myclock"></div>
+ </div>
+ <div class="clock-bottom">
+ <div class="clock">
+ <div id="Date"></div>
+ <ul>
+ <li id="hours"> </li>
+ <li id="point">:</li>
+ <li id="min"> </li>
+ <li id="point">:</li>
+ <li id="sec"> </li>
+ </ul>
+ </div>
+ </div>
+ </div>
+ </div>
+
+</body>
+</html>
