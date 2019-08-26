@@ -1,0 +1,10 @@
+body {
+font-family: Geneva, Arial, Helvetica, sans-serif;
+background-color: RGB(249, 201, 16);
+}
+div {
+background: RGB(255, 255, 255); /* Цвет фона */
+box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+padding: 10px;
+font-size: 200%;
+}
