@@ -67,14 +67,8 @@ int Gx;
 int Gy;
 int cooldown;
 int lastKeyCode;
-
-boolean wPressed = false;
-boolean aPressed = false;
-boolean sPressed = false;
-boolean dPressed = false;
-
 button buttonStart;
-button buttonResume;
+button buttonRusume;
 button buttonRestart;
 
 
@@ -119,7 +113,7 @@ void setup()
 
   buttonStart = new button(120, 140, 200, 100, "START");
   buttonRestart = new button(120, 140, 200, 100, "RESTART");
-  buttonRusume = new button(300, 340, 200, 100, "RESUME");
+  buttonRusume = new button(300, 340, 200, 100, "RUSUME");
 }
 
 
@@ -155,11 +149,11 @@ void draw()
     }
     if (gameStart == true)
     {
-      buttonResume.draw();
-    }
-    if (gameOver == true)
-    {
-      buttonRestart.draw();
+      if (gameStart == true || gameOver == true)
+      {
+        buttonRestart.draw();
+      }
+      buttonRusume.draw();
     }
   }
 }

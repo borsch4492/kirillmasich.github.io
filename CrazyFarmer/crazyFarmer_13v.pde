@@ -1,28 +1,5 @@
-/* @pjs preload="./assets/mapTextures/swamp_2.jpg","./assets/mapTextures/grass_2.jpg","./assets/mapTextures/river_2.jpg","./assets/mapTextures/road_2.jpg","./assets/otherTextures/loot.png","./assets/otherTextures/car.png","./assets/playerTextures/player1.png","./assets/playerTextures/player2.png","./assets/playerTextures/player3.png","./assets/playerTextures/player4.png","./assets/monsterTextures/monster1.png","./assets/monsterTextures/monster2.png","./assets/monsterTextures/monster3.png","./assets/monsterTextures/monster4.png","./assets/otherTextures/granade.png"; */
-
 PImage imgSwamp, imgGrass, imgRiver, imgRoad, imgLoot, imgCar, imgPlayer1, imgPlayer2, imgPlayer3, imgPlayer4, imgEnemy1, imgEnemy2, imgEnemy3, imgEnemy4, imgGranade; //<>// //<>//
-String[] map = {
-"..........~.........",
-".......%%.~.........",
-".......%%.~.........",
-"@.....@.@.~...@.....",
-"...@......~.........",
-"..........~.........",
-"..........~....%%...",
-"..........~....%%...",
-"..........~.........",
-"........%%~..@......",
-".....@..%%~...%%....",
-"..........~...%%....",
-"====================",
-"..........~.........",
-"..........~.....%%..",
-"..........~.....%%..",
-"..........~.........",
-"..........~.........",
-"..........~.........",
-"..........~........."
-}; //<Don`t forget what we have debug ;)>//
+String[] map; //<Don`t forget what we have debug ;)>//
 boolean gameWin = false;
 boolean gameOver = false;
 boolean debugMode = false;
@@ -83,15 +60,6 @@ void setup()
   frameRate(25);
   background(255);
   noStroke();
-  try
-  {
-    font = loadFont("tahoma.ttf");
-    textFont(font);
-  }
-  catch (Exception e)
-  {
-    //println(e);
-  }
   mapGenerator();
 
   imgSwamp = loadImage("assets/mapTextures/swamp_2.jpg");
@@ -831,7 +799,6 @@ void mousePressed()
     mapGenerator();
   }
 }
-
 
 class button
 {
