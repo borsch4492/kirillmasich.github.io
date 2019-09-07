@@ -153,6 +153,7 @@ void draw()
       {
         buttonRestart.draw();
       }
+      buttonRestart.draw();
       buttonRusume.draw();
     }
   }
