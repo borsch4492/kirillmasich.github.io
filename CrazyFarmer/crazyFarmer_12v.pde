@@ -402,7 +402,7 @@ void keyPressed()
       }
       paz = 4;
     }
-    if (keyCode == 65 && px != 0 && gameStopped == false) // a = 65
+    if (keyCode == 65 && px != 0 && gameStopped == false || keyCode == 37 && px != 0 && gameStopped == false) // a = 65
     {
       copyPlayerCoords();
       px -= 1;
@@ -412,7 +412,7 @@ void keyPressed()
       }
       paz = 3;
     }
-    if (keyCode == 83 && py != DIM - 1 && gameStopped == false) // s = 83
+    if (keyCode == 83 && py != DIM - 1 && gameStopped == false || keyCode == 40 && py != DIM - 1 && gameStopped == false) // s = 83
     {
       copyPlayerCoords();
       py += 1;
@@ -422,7 +422,7 @@ void keyPressed()
       }
       paz = 2;
     }
-    if (keyCode == 68 && px != DIM - 1 && gameStopped == false) // d = 68
+    if (keyCode == 68 && px != DIM - 1 && gameStopped == false || keyCode == 39 && px != DIM - 1 && gameStopped == false) // d = 68
     {
       copyPlayerCoords();
       px += 1;
