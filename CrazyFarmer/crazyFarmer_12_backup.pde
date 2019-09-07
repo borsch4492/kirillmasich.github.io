@@ -113,7 +113,7 @@ void setup()
 
   buttonStart = new button(120, 140, 200, 100, "START");
   buttonRestart = new button(120, 140, 200, 100, "RESTART");
-  buttonRusume = new button(300, 340, 200, 100, "RUSUME");
+  buttonRusume = new button(300, 340, 200, 100, "RESUME");
 }
 
 
@@ -149,11 +149,15 @@ void draw()
     }
     if (gameStart == true)
     {
-      if (gameStart == true || gameOver == true)
+      if (gameOver == true)
       {
         buttonRestart.draw();
       }
-      buttonRusume.draw();
+      if (gameOver == false)
+      {
+        buttonRestart.draw();
+        buttonRusume.draw();
+      }
     }
   }
 }
@@ -388,7 +392,7 @@ void keyPressed()
   //println(keyCode);
   if (gameWin != true && gameOver != true)
   {
-    if (keyCode == 87 && py != 0 && gameStopped == false) // w = 87
+    if (keyCode == 87 && py != 0 && gameStopped == false || keyCode == 38 && py != 0 && gameStopped == false) // w = 87
     {
       copyPlayerCoords();
       py -= 1;
@@ -398,7 +402,7 @@ void keyPressed()
       }
       paz = 4;
     }
-    if (keyCode == 65 && px != 0 && gameStopped == false) // a = 65
+    if (keyCode == 65 && px != 0 && gameStopped == false || keyCode == 37 && px != 0 && gameStopped == false) // a = 65
     {
       copyPlayerCoords();
       px -= 1;
@@ -408,7 +412,7 @@ void keyPressed()
       }
       paz = 3;
     }
-    if (keyCode == 83 && py != DIM - 1 && gameStopped == false) // s = 83
+    if (keyCode == 83 && py != DIM - 1 && gameStopped == false || keyCode == 40 && py != DIM - 1 && gameStopped == false) // s = 83
     {
       copyPlayerCoords();
       py += 1;
@@ -418,7 +422,7 @@ void keyPressed()
       }
       paz = 2;
     }
-    if (keyCode == 68 && px != DIM - 1 && gameStopped == false) // d = 68
+    if (keyCode == 68 && px != DIM - 1 && gameStopped == false || keyCode == 39 && px != DIM - 1 && gameStopped == false) // d = 68
     {
       copyPlayerCoords();
       px += 1;

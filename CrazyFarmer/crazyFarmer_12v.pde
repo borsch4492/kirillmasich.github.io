@@ -118,6 +118,8 @@ void setup()
   buttonStart = new button(120, 140, 200, 100, "START");
   buttonRestart = new button(120, 140, 200, 100, "RESTART");
   buttonRusume = new button(300, 340, 200, 100, "RESUME");
+  Up = new button(10, 10, 100, 100, " /\ ");
+  //Left = new button(10, 10, 100, 100, " /\ ");
 }
 
 
@@ -164,6 +166,7 @@ void draw()
       }
     }
   }
+  Up.draw();
 }
 
 
