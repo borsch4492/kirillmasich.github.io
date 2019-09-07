@@ -113,7 +113,7 @@ void setup()
 
   buttonStart = new button(120, 140, 200, 100, "START");
   buttonRestart = new button(120, 140, 200, 100, "RESTART");
-  buttonRusume = new button(300, 340, 200, 100, "RUSUME");
+  buttonRusume = new button(300, 340, 200, 100, "RESUME");
 }
 
 
@@ -149,7 +149,7 @@ void draw()
     }
     if (gameStart == true)
     {
-      if (gameStart == true || gameOver == true)
+      if (gameOver == true)
       {
         buttonRestart.draw();
       }
