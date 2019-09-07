@@ -26,7 +26,7 @@ String[] map = {
 }; //<Don`t forget what we have debug ;)>//
 boolean gameWin = false;
 boolean gameOver = false;
-boolean debugMode = false;
+boolean debugMode = true;
 boolean GoD = false;
 boolean gameStopped = true;
 boolean gameStart = false;
@@ -70,6 +70,10 @@ int lastKeyCode;
 button buttonStart;
 button buttonRusume;
 button buttonRestart;
+button Up;
+button Left;
+button Right;
+button Down;
 
 
 void setup()
