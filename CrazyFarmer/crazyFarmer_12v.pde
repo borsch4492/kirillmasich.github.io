@@ -392,7 +392,7 @@ void keyPressed()
   //println(keyCode);
   if (gameWin != true && gameOver != true)
   {
-    if (keyCode == 87 && py != 0 && gameStopped == false || keyCode == 87 && py != 0 && gameStopped == false) // w = 87
+    if (keyCode == 87 && py != 0 && gameStopped == false || keyCode == 38 && py != 0 && gameStopped == false) // w = 87
     {
       copyPlayerCoords();
       py -= 1;
