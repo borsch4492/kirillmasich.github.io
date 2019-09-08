@@ -26,7 +26,7 @@ String[] map = {
 }; //<Don`t forget what we have debug ;)>//
 boolean gameWin = false;
 boolean gameOver = false;
-boolean debugMode = true;
+boolean debugMode = false;
 boolean GoD = false;
 boolean gameStopped = true;
 boolean gameStart = false;
@@ -172,10 +172,13 @@ void draw()
       }
     }
   }
-  Up.draw();
-  Left.draw();
-  Right.draw();
-  Down.draw();
+  if (debugMode == true)
+  {
+    Up.draw();
+    Left.draw();
+    Right.draw();
+    Down.draw();
+  }
 }
 
 
