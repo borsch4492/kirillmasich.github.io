@@ -167,6 +167,7 @@ void draw()
     }
   }
   Up.draw();
+  Left.draw();
 }
 
 
