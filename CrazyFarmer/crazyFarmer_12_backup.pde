@@ -26,7 +26,7 @@ String[] map = {
 }; //<Don`t forget what we have debug ;)>//
 boolean gameWin = false;
 boolean gameOver = false;
-boolean debugMode = false;
+boolean debugMode = true;
 boolean GoD = false;
 boolean gameStopped = true;
 boolean gameStart = false;
@@ -70,6 +70,14 @@ int lastKeyCode;
 button buttonStart;
 button buttonRusume;
 button buttonRestart;
+button Up;
+button Left;
+button Right;
+button Down;
+boolean pUp;
+boolean pLeft;
+boolean pRight;
+boolean pDown;
 
 
 void setup()
@@ -114,6 +122,10 @@ void setup()
   buttonStart = new button(120, 140, 200, 100, "START");
   buttonRestart = new button(120, 140, 200, 100, "RESTART");
   buttonRusume = new button(300, 340, 200, 100, "RESUME");
+  Up = new button(10, 10, 100, 100, "↑");
+  Left = new button(10, 110, 100, 100, "←");
+  Right = new button(10, 210, 100, 100, "→");
+  Down = new button(10, 310, 100, 100, "↓");
 }
 
 
@@ -160,6 +172,10 @@ void draw()
       }
     }
   }
+  Up.draw();
+  Left.draw();
+  Right.draw();
+  Down.draw();
 }
 
 
@@ -776,6 +792,10 @@ void mouseMoved()
     buttonRusume.mouseMoved(mouseX, mouseY);
     buttonRestart.mouseMoved(mouseX, mouseY);
   }
+  Up.mouseMoved(mouseX, mouseY);
+  Right.mouseMoved(mouseX, mouseY);
+  Left.mouseMoved(mouseX, mouseY);
+  Down.mouseMoved(mouseX, mouseY);
 }
 
 void mousePressed()
@@ -802,8 +822,31 @@ void mousePressed()
       gameOver = false;
     }
   }
+  if (Up.mousePressed(mouseX, mouseY) == true)
+  {
+    pUp = true;
+  } else if (Right.mousePressed(mouseX, mouseY) == true)
+  {
+    pRight = true;
+  } else if (Left.mousePressed(mouseX, mouseY) == true)
+  {
+    pLeft = true;
+  } else if (Down.mousePressed(mouseX, mouseY) == true)
+  {
+    pDown = true;
+  } else
+  {
+    pUp = false;
+    pRight = false;
+    pLeft = false;
+    pDown = false;
+  }
 }
 
+void playerGo()
+{
+
+}
 
 class button
 {

@@ -74,6 +74,10 @@ button Up;
 button Left;
 button Right;
 button Down;
+boolean pUp;
+boolean pLeft;
+boolean pRight;
+boolean pDown;
 
 
 void setup()
@@ -120,6 +124,8 @@ void setup()
   buttonRusume = new button(300, 340, 200, 100, "RESUME");
   Up = new button(10, 10, 100, 100, "↑");
   Left = new button(10, 110, 100, 100, "←");
+  Right = new button(10, 210, 100, 100, "→");
+  Down = new button(10, 310, 100, 100, "↓");
 }
 
 
@@ -168,6 +174,8 @@ void draw()
   }
   Up.draw();
   Left.draw();
+  Right.draw();
+  Down.draw();
 }
 
 
@@ -398,49 +406,7 @@ void keyPressed()
   }
   //print("keyCode = ");
   //println(keyCode);
-  if (gameWin != true && gameOver != true)
-  {
-    if (keyCode == 87 && py != 0 && gameStopped == false || keyCode == 38 && py != 0 && gameStopped == false) // w = 87
-    {
-      copyPlayerCoords();
-      py -= 1;
-      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
-      {
-        py += 1;
-      }
-      paz = 4;
-    }
-    if (keyCode == 65 && px != 0 && gameStopped == false || keyCode == 37 && px != 0 && gameStopped == false) // a = 65
-    {
-      copyPlayerCoords();
-      px -= 1;
-      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
-      {
-        px +=1;
-      }
-      paz = 3;
-    }
-    if (keyCode == 83 && py != DIM - 1 && gameStopped == false || keyCode == 40 && py != DIM - 1 && gameStopped == false) // s = 83
-    {
-      copyPlayerCoords();
-      py += 1;
-      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
-      {
-        py -= 1;
-      }
-      paz = 2;
-    }
-    if (keyCode == 68 && px != DIM - 1 && gameStopped == false || keyCode == 39 && px != DIM - 1 && gameStopped == false) // d = 68
-    {
-      copyPlayerCoords();
-      px += 1;
-      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
-      {
-        px -= 1;
-      }
-      paz = 1;
-    }
-  }
+
 
   if (keyCode == 32 && bombPlanted == false && gameStopped == false) // SPACE = 32
   {
@@ -784,6 +750,10 @@ void mouseMoved()
     buttonRusume.mouseMoved(mouseX, mouseY);
     buttonRestart.mouseMoved(mouseX, mouseY);
   }
+  Up.mouseMoved(mouseX, mouseY);
+  Right.mouseMoved(mouseX, mouseY);
+  Left.mouseMoved(mouseX, mouseY);
+  Down.mouseMoved(mouseX, mouseY);
 }
 
 void mousePressed()
@@ -810,8 +780,73 @@ void mousePressed()
       gameOver = false;
     }
   }
+  if (Up.mousePressed(mouseX, mouseY) == true)
+  {
+    pUp = true;
+  } else if (Right.mousePressed(mouseX, mouseY) == true)
+  {
+    pRight = true;
+  } else if (Left.mousePressed(mouseX, mouseY) == true)
+  {
+    pLeft = true;
+  } else if (Down.mousePressed(mouseX, mouseY) == true)
+  {
+    pDown = true;
+  } else
+  {
+    pUp = false;
+    pRight = false;
+    pLeft = false;
+    pDown = false;
+  }
 }
 
+void playerGo()
+{
+  if (gameWin != true && gameOver != true)
+  {
+    if (lastKeyCode == 87 && py != 0 && gameStopped == false || lastKeyCode == 38 && py != 0 && gameStopped == false || pUp == true && gameStopped == false) // w = 87
+    {
+      copyPlayerCoords();
+      py -= 1;
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
+      {
+        py += 1;
+      }
+      paz = 4;
+    }
+    if (lastKeyCode == 65 && px != 0 && gameStopped == false || lastKeyCode == 37 && px != 0 && gameStopped == false || pLeft == true && gameStopped == false) // a = 65
+    {
+      copyPlayerCoords();
+      px -= 1;
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
+      {
+        px +=1;
+      }
+      paz = 3;
+    }
+    if (lastKeyCode == 83 && py != DIM - 1 && gameStopped == false || lastKeyCode == 40 && py != DIM - 1 && gameStopped == false || pDown == true && gameStopped == false) // s = 83
+    {
+      copyPlayerCoords();
+      py += 1;
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
+      {
+        py -= 1;
+      }
+      paz = 2;
+    }
+    if (lastKeyCode == 68 && px != DIM - 1 && gameStopped == false || lastKeyCode == 39 && px != DIM - 1 && gameStopped == false || pRight == true && gameStopped == false) // d = 68
+    {
+      copyPlayerCoords();
+      px += 1;
+      if (map[py].charAt(px) != str('.') && map[py].charAt(px) != str('=') && map[py].charAt(px) != str('@'))
+      {
+        px -= 1;
+      }
+      paz = 1;
+    }
+  }
+}
 
 class button
 {
