@@ -406,7 +406,7 @@ void keyPressed()
   }
   //print("keyCode = ");
   //println(keyCode);
-
+  playerGo();
 
   if (keyCode == 32 && bombPlanted == false && gameStopped == false) // SPACE = 32
   {
