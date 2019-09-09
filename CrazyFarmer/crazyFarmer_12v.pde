@@ -408,7 +408,7 @@ void keyPressed()
     return;
   }
   //print("keyCode = ");
-  //println(keyCode);
+  //println(keyCode);//
   if (gameWin != true && gameOver != true)
   {
     if (keyCode == 87 && py != 0 && gameStopped == false || keyCode == 38 && py != 0 && gameStopped == false) // w = 87
