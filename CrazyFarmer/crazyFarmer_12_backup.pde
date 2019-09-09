@@ -889,7 +889,7 @@ class button
     image(_bg, _bx, _by);
   }
 
-  void drawPrepare()
+  void drawPrepare()//
   {
     _bg.beginDraw();
     _bg.background(0);
