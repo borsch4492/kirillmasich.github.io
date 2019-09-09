@@ -401,7 +401,7 @@ void gameLogic()
   }
 }
 
-void keyTyped()
+void keyPressed()
 {
   if (faze != 0)
   {
