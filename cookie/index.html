@@ -10,7 +10,7 @@ font-family: Geneva, Arial, Helvetica, sans-serif;
 <script>
 function saveValues()
 {
-	localStorage._user = document.getElementById("user").value;
+	localStorage._user = document.getElementById("user").value.toString();
 	localStorage._uage = document.getElementById("age").value.toString();
 }
 function loadValues()
