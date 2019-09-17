@@ -5,36 +5,48 @@
 <link ref="shortcut icon" href="favicon.ico" type="image/x-icon">
 <link ref="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="style.css">
-<script type="text/javascript">
-  var login = false;
-  function saveValues()
-  {
-  	localStorage._user = document.getElementById("user").value.toString();
-  	localStorage._password = document.getElementById("password").value.toString();
-  }
-
-  if (localStorage._user == undefined && localStorage._password == undefined)
-  {
-    login = true;
-    <!--document.getElementById('user').hidden = true;-->
-    <!--document.getElementById('password').hidden = true;-->
-    <!--document.getElementById('button').hidden = true;-->
-    <!--document.getElementById('button2').hidden = false;-->
-  }
-  function singOut()
-  {
-    localStorage.clear();
-  }
-</script>
 </head>
 <body>
-<div class="shadow">Hello World!</div>
+<div class="shadow"><input type="text" id='div'></div>
 <p></p>
 <input type="text" id='user' placeholder="Name" hidden="false">
 <input type="text" id='password' placeholder="Password" hidden="false">
 <button type="button" onclick="saveValues()" id='button' hidden="false">Enter</button>
-<button type="button" onclick="singOut()" id='button2' hidden="false">Singout</button>
+<button type="button" onclick="singOut()" id='button2' hidden="true">Singout</button>
 <p>I'm hosted with GitHub Pages.</p>
 <a href="CrazyFarmer\index.html">CrazyFarmer v1.3</a>
+<script type="text/javascript">
+  var login = false;
+  document.getElementById('div').value = "Hello User!";
+
+  if (localStorage._user != undefined && localStorage._password != undefined)
+  {
+    login = true;
+    document.getElementById('div').value = "Hello " + localStorage._user + "!";
+    document.getElementById('user').hidden = true;
+    document.getElementById('password').hidden = true;
+    document.getElementById('button').hidden = true;
+    document.getElementById('button2').hidden = false;
+  } else {
+    document.getElementById('user').hidden = false;
+    document.getElementById('password').hidden = false;
+    document.getElementById('button').hidden = false;
+    document.getElementById('button2').hidden = true;
+  }
+
+  function saveValues()
+  {
+  	localStorage._user = document.getElementById('user').value.toString();
+  	localStorage._password = document.getElementById('password').value.toString();
+    document.location.reload(true);
+  }
+
+  function singOut()
+  {
+    localStorage.clear();
+    console.log("true");
+    document.location.reload(true);
+  }
+</script>
 </body>
 </html>
