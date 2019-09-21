@@ -49,6 +49,7 @@ function draw() {
 
 function randomCoin()
 {
+  el = true;
   cx = (int(random(0, 100))*5);
   cy = (int(random(0, 100))*5);
 }
