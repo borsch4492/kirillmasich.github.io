@@ -1,0 +1,10 @@
+
+function setup() {
+  createCanvas(600, 400);
+  text("Hello", 10, 10);
+}
+
+function draw() {
+  background(255);
+  text("Hello", 10, 10);
+}
