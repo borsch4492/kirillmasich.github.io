@@ -3,7 +3,12 @@ var y = 100;
 var cx = 100;
 var cy = 100;
 var el = true;
-var stop = false;
+var hit = false;
+
+function preload() {
+  soundFormats('mp3', 'ogg');
+  mySound = loadSound('sounds/bell.mp3');
+}
 
 function setup() {
   createCanvas(500, 500);
@@ -12,28 +17,36 @@ function setup() {
 
 function draw() {
   background(240);
-  if (keyIsDown(LEFT_ARROW)) {
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
     x -= 5;
   }
 
-  if (keyIsDown(RIGHT_ARROW)) {
+  if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
     x += 5;
   }
 
-  if (keyIsDown(UP_ARROW)) {
+  if (keyIsDown(UP_ARROW) || keyIsDown(87)) {
     y -= 5;
   }
 
-  if (keyIsDown(DOWN_ARROW)) {
+  if (keyIsDown(DOWN_ARROW) || keyIsDown(83)) {
     y += 5;
   }
-
+  if (document.getElementById("checkbox").checked == true && el == false)
+  {
+    randomCoin();
+  }
+  hit = collideRectCircle(x,y,50,50,cx,cy,25);
 
   fill(255, 0, 0);
   rect(x, y, 50, 50);
   fill(255, 255, 0);
-  if (cy == y+25 && cx == x+25)
+  if (hit)
   {
+    if (el == true)
+    {
+      mySound.play();
+    }
     el = false
   }
   if (el == true)
@@ -46,6 +59,11 @@ function draw() {
   // console.log("Coin X: " + cx + "Y: " + cy, 10, 0);
   text("Rect X: " + (x+25) + " Y: " + (y+25), x-20, y-5);
 
+}
+
+function keyPressed()
+{
+  print(keyCode);
 }
 
 function randomCoin()
