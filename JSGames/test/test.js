@@ -3,6 +3,7 @@ var y = 100;
 var cx = 100;
 var cy = 100;
 var el = true;
+var stop = false;
 
 function setup() {
   createCanvas(500, 500);
