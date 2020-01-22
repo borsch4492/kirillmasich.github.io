@@ -1,9 +1,9 @@
-<input type="number" id="input1" placeholder="Введите ставку 1">
+<input type="number" id="input1" placeholder="Enter bet 1">
 <button onclick="calc1()" id="btn1" >+ Su1</button>
 <br>
 <div id="div1"></div>
 <br>
-<input type="number" id="input2" placeholder="Введите ставку 2">
+<input type="number" id="input2" placeholder="Enter bet 2">
 <button onclick="calc2()" id="btn2" >+ Su2</button>
 <div id="div2"></div>
 
@@ -29,7 +29,7 @@ var su2 = 0;
 			var c1 = (su1 + su2) / su1;
 			var c2 = (su1 + su2) / su2;
 			//alert("" + s1 + ", " + s2 + "\n" + c1 + ", " + c2);
-			document.getElementById("div1").innerHTML = "Сумма 1 = " + su1 + ", Коэффициент 1 = " + c1;
-			document.getElementById("div2").innerHTML = "Сумма 2 = " + su2 + ", Коэффициент 2 = " + c2;
+			document.getElementById("div1").innerHTML = "Full bet 1 = " + su1 + ", Coefficient 1 = " + c1;
+			document.getElementById("div2").innerHTML = "Full bet 2 = " + su2 + ", Coefficient 2 = " + c2;
 		}
 </script>
