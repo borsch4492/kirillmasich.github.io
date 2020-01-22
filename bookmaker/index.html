@@ -1,0 +1,35 @@
+<input type="number" id="input1" placeholder="¬‚Â‰ËÚÂ ÒÚ‡‚ÍÛ 1">
+<button onclick="calc1()" id="btn1" >+ Su1</button>
+<br>
+<div id="div1"></div>
+<br>
+<input type="number" id="input2" placeholder="¬‚Â‰ËÚÂ ÒÚ‡‚ÍÛ 2">
+<button onclick="calc2()" id="btn2" >+ Su2</button>
+<div id="div2"></div>
+
+<script>
+var su1 = 0;
+var su2 = 0;
+
+	function calc1(){
+			var s1 = parseFloat(document.getElementById("input1").value);
+			su1 += s1;
+			calcAll();
+		}
+		
+	function calc2(){
+			var s2 = parseFloat(document.getElementById("input2").value);
+			su2 += s2;
+			calcAll();
+		}
+
+	function calcAll(){
+			//var s1 = parseFloat(document.getElementById("input1").value);
+			//var s2 = parseFloat(document.getElementById("input2").value);
+			var c1 = (su1 + su2) / su1;
+			var c2 = (su1 + su2) / su2;
+			//alert("" + s1 + ", " + s2 + "\n" + c1 + ", " + c2);
+			document.getElementById("div1").innerHTML = "—”ÃÃ¿1 = " + su1 + ",  Œ›‘‘»÷»≈Õ“1 = " + c1;
+			document.getElementById("div2").innerHTML = "—”ÃÃ¿2 = " + su2 + ",  Œ›‘‘»÷»≈Õ“2 = " + c2;
+		}
+</script>
